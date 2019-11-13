@@ -19,5 +19,7 @@ namespace DocFx.Plugins.PlantUml.OutputFormatters
 
             return $"<div class=\"{options.LangPrefix}plantUml\" \\><pre>{ascii}</pre></div>";
         }
+
+        public bool UseUri => false;
     }
 }

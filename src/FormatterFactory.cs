@@ -33,6 +33,9 @@ namespace DocFx.Plugins.PlantUml
                     return new AsciiUnicodeOutputFormatter(options);
 
                 case OutputFormat.Png:
+                
+                    return new ImageOutputFormatter(options, OutputFormat);
+
                 case OutputFormat.Eps:
                 case OutputFormat.Pdf:
                 case OutputFormat.Vdx:
@@ -40,6 +43,7 @@ namespace DocFx.Plugins.PlantUml
                 case OutputFormat.Scxml:
                 case OutputFormat.Html:
                 case OutputFormat.LaTeX:
+
                 default:
 
                     throw new NotSupportedException($"output format {OutputFormat} is not currently supported");

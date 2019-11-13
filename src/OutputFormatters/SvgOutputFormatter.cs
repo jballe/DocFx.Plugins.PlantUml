@@ -19,5 +19,7 @@ namespace DocFx.Plugins.PlantUml.OutputFormatters
 
             return $"<div class=\"{options.LangPrefix}plantUml\" \\> {svg} </div>";
         }
+        public bool UseUri => false;
+
     }
 }

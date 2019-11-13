@@ -5,5 +5,6 @@ namespace DocFx.Plugins.PlantUml
     internal interface IOutputFormatter
     {
         StringBuffer FormatOutput(MarkdownCodeBlockToken token, byte[] output);
+        bool UseUri { get; }
     }
 }
