@@ -37,7 +37,6 @@ namespace DocFx.Plugins.PlantUml
             var dir = Path.Combine(context.GetBaseFolder(), "diagrams");
             IPlantUmlRenderer plantUmlRenderer = rendererFactory.CreateRenderer(settings, dir);
             IOutputFormatter outputFormatter = formatterFactory.CreateOutputFormatter(markdownRenderer.Options);
-            File.WriteAllText(@"c:\out\workingdir.log", dir);
 
             byte[] output;
             if (outputFormatter.UseUri)
