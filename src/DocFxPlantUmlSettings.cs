@@ -15,6 +15,7 @@ namespace DocFx.Plugins.PlantUml
             OutputFormat = parameters.GetEnumOrDefault("plantUml.outputFormat", OutputFormat.Svg);
             RemoteUrl = parameters.GetValueOrDefault("plantUml.remoteUrl", RemoteUrl);
             RenderingMode = parameters.GetEnumOrDefault("plantUml.renderingMode", RenderingMode);
+            InputMode = parameters.GetEnumOrDefault("plantUml.inputMode", InputMode);
         }
     }
 }
