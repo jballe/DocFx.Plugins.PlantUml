@@ -22,28 +22,10 @@ namespace DocFx.Plugins.PlantUml.OutputFormatters
                 return StringBuffer.Empty;
             }
 
-            string imgSrc = null;
-            try
-            {
-                string url = System.Text.Encoding.UTF8.GetString(output);
-                if (url.StartsWith("http"))
-                {
-                    imgSrc = url;
-                }
-            }
-            catch (Exception)
-            {
-                imgSrc = null;
-            }
-
-            if (imgSrc == null)
-            {
-                imgSrc = $"data:image/{format.ToString().ToLowerInvariant()};base64" + Convert.ToBase64String(output);
-            }
-
+            var imgSrc = $"data:image/{format.ToString().ToLowerInvariant()};base64,{Convert.ToBase64String(output)}";
             return $"<div class=\"{options.LangPrefix}plantuml-image\"><img src=\"{imgSrc}\" /></div>";
         }
-        public bool UseUri => true;
+        public bool UseUri => false;
 
     }
 }

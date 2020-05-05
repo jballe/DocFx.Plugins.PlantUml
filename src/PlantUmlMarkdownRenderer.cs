@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Microsoft.DocAsCode.Dfm;
 using Microsoft.DocAsCode.MarkdownLite;
 using PlantUml.Net;
@@ -32,38 +30,41 @@ namespace DocFx.Plugins.PlantUml
 
         public override StringBuffer Render(IMarkdownRenderer markdownRenderer, MarkdownCodeBlockToken token, MarkdownBlockContext context)
         {
-            //var dir = Path.Combine(context.GetBaseFolder(), GetFilePath(context));
-            //var dir = Path.Combine(context.GetBaseFolder(), context.GetFilePathStack().Peek());
-            var dir = Path.Combine(context.GetBaseFolder(), "diagrams");
-            IPlantUmlRenderer plantUmlRenderer = rendererFactory.CreateRenderer(settings, dir);
-            IOutputFormatter outputFormatter = formatterFactory.CreateOutputFormatter(markdownRenderer.Options);
+//#if DEBUG
+//            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
+//#endif
 
-            byte[] output;
-            if (outputFormatter.UseUri)
-            {
-                var uri = plantUmlRenderer.RenderAsUri(token.Code, settings.OutputFormat);
-                output = System.Text.Encoding.UTF8.GetBytes(uri.ToString());
-            }
-            else
-            {
-                output = plantUmlRenderer.Render(token.Code, settings.OutputFormat);
-            }
+            var sourceFilePath = Path.Combine(context.GetBaseFolder(), context.GetFilePathStack().Peek());
+            var dir = Directory.GetParent(sourceFilePath).FullName;
 
-            return outputFormatter.FormatOutput(token, output);
+            var plantUmlRenderer = rendererFactory.CreateRenderer(settings, dir);
+            var outputFormatter = formatterFactory.CreateOutputFormatter(markdownRenderer.Options);
+
+            try
+            {
+                byte[] output;
+                if (outputFormatter.UseUri)
+                {
+                    var uri = plantUmlRenderer.RenderAsUri(token.Code, settings.OutputFormat);
+                    output = System.Text.Encoding.UTF8.GetBytes(uri.ToString());
+                }
+                else
+                {
+                    output = plantUmlRenderer.Render(token.Code, settings.OutputFormat);
+                }
+
+                return outputFormatter.FormatOutput(token, output);
+            }
+            catch (ArgumentException exc)
+            {
+                Console.WriteLine($"Error while rendering PlantUml code in {sourceFilePath}: {exc}");
+                return $"<code class=\"{token.Lang}\">{token.Code}</code>";
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine($"Error while rendering PlantUml code in {sourceFilePath}: {exc}");
+                throw;
+            }
         }
-
-        // private string GetFilePath(MarkdownBlockContext context)
-        // {
-        //     // Will use reflection as a got assembly version error for System.Collections.Immutable
-        //     var stack = context.Variables["FilePathStack"];
-        //     var ie = (IEnumerable<string>) stack;
-        //     return ie.First();
-        // 
-        // 
-        //     var t = stack.GetType();
-        //     var peekMethod = t.GetMethod("Peek");
-        //     var result = peekMethod.Invoke(stack, null) as string;
-        //     return result;
-        // }
     }
 }

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2043
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocFx.Plugins.PlantUml", "src\DocFx.Plugins.PlantUml.csproj", "{F02271F7-38AF-46A6-898E-A8FDBBD548A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocFx.Plugins.PlantUml", "src\DocFx.Plugins.PlantUml.csproj", "{F02271F7-38AF-46A6-898E-A8FDBBD548A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlantUml.Net", "..\PlantUml.Net\src\PlantUml.Net.csproj", "{6E4AA61C-22F9-4C01-A90E-B51B78B00064}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F02271F7-38AF-46A6-898E-A8FDBBD548A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F02271F7-38AF-46A6-898E-A8FDBBD548A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F02271F7-38AF-46A6-898E-A8FDBBD548A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E4AA61C-22F9-4C01-A90E-B51B78B00064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E4AA61C-22F9-4C01-A90E-B51B78B00064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E4AA61C-22F9-4C01-A90E-B51B78B00064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E4AA61C-22F9-4C01-A90E-B51B78B00064}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
